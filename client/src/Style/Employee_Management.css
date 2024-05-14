@@ -1,0 +1,188 @@
+.employee-management-page {
+  /* background-color: blueviolet; */
+  margin: 10px;
+  width: 180vh;
+  background-color: rgb(249, 249, 249);
+}
+.submitbuton {
+  display: grid;
+  place-items: center; /* Center items both horizontally and vertically */
+}
+.submitbuton button {
+  height: 50px;
+  font-size: large;
+}
+.view {
+  width: 45vh;
+  height: 105vh;
+  margin: 10px;
+  background-color: #e8e8e8d4;
+  border-radius: 4px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.employee-management-page button {
+  margin-right: 10px;
+  padding: 8px 12px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.Navbar {
+}
+
+.text {
+  /* Prevent text from wrapping */
+}
+
+.button {
+  margin: 30px;
+}
+.buttons {
+  /* background-color: rgb(16, 240, 54); */
+  width: 100%;
+}
+.content {
+  display: flex;
+  background-color: rgb(253, 253, 253);
+  width: 100%;
+  padding: 10px;
+}
+.vline {
+  width: 30px;
+}
+.employeeForm {
+  background-color: rgb(235, 235, 235);
+  max-width: 400px;
+  max-height: 500px;
+  padding: 20px;
+  margin-top: -30px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+.employeeForm2 {
+  background-color: rgb(235, 235, 235);
+  max-width: 600px;
+  max-height: 500px;
+  padding: 20px;
+  margin-top: -30px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+
+.Formcontent {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.Formcontent label,
+.Formcontent input,
+.Formcontent select {
+  width: calc(40% - 10px); /* Two elements per row */
+  margin-bottom: 10px;
+}
+
+.Formcontent label {
+  font-weight: bold;
+}
+
+.Formcontent input,
+.Formcontent select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-bottom: 10px; /* Add margin between label and input/select */
+}
+.line {
+  height: 0.6px;
+  background-color: rgb(255, 255, 255);
+  margin-bottom: 20px;
+}
+.margin {
+  padding-bottom: 5px;
+}
+.margin label {
+  color: #480101;
+  font-size: large;
+}
+
+.content > div {
+}
+.item {
+  flex: 0 0 calc(33.33% - 10px); /* Adjust the width of each item */
+  margin-bottom: 20px; /* Add margin between items */
+  color: white;
+}
+.employeeCards {
+  display: flex;
+
+  width: 100%;
+  margin-left: 20px;
+}
+.employee-card {
+  background-color: rgb(226, 226, 226);
+  width: 250px;
+  height: 150px;
+  padding-left: 10px;
+  padding-top: 1px;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  margin: 10px;
+}
+.employee-card h2 {
+  color: rgb(0, 0, 0);
+}
+.employee-card p {
+  color: rgb(0, 0, 0);
+}
+
+.employee-card button {
+  height: 30px;
+
+  margin: 10px;
+  margin-left: 90px;
+}
+
+.dropDownMenu {
+  padding: 20px;
+}
+
+.content {
+  displa: flex;
+}
+.DashImages {
+  margin-top: -100px;
+  background-color: #680101;
+  --mask: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 1) 0,
+      rgba(0, 0, 0, 1) 40%,
+      rgba(0, 0, 0, 0) 95%,
+      rgba(0, 0, 0, 0) 0
+    )
+    100% 10% / 100% 70% repeat-x;
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
+}
+.DashImages img {
+  height: 900px;
+  width: 1200px;
+  padding: 25px;
+  background-color: #ffffff;
+}
+
+.main-content {
+}
+
+.content2 {
+  display: flex;
+  flex-direction: column;
+}

@@ -1,0 +1,32 @@
+.Navbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 100px;
+  width: 100%;
+  background-color: rgb(104, 8, 8);
+}
+
+.container {
+  height: 20px;
+  width: 200px;
+  background-color: rgb(104, 8, 8);
+}
+.main {
+}
+.body {
+  margin: -25px;
+  display: flex;
+}
+.logo {
+  height: 70px;
+
+}
+.Navbar h1 {
+  color: azure;
+  font-size: 35px;
+  text-align: center;
+  padding-left: 400px;
+  white-space: nowrap;
+}

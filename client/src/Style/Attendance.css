@@ -1,0 +1,60 @@
+.attendance-page {
+  padding: 20px;
+}
+
+.attendance-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.attendance-table th,
+.attendance-table td {
+  padding: 10px;
+  border: 1px solid #ffffff;
+}
+
+.attendance-table th {
+  background-color: #f2f2f2;
+  text-align: left;
+}
+
+.attendance-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.attendance-table tbody tr:hover {
+  background-color: #f2f2f2;
+}
+
+.attendance-table input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.Body {
+  display: flex;
+  flex-flow: row wrap;
+
+  background-color: rgb(255, 255, 255);
+
+  padding: 10px;
+}
+
+.attendancebuttondiv {
+  width: 700px; /* Adjust width as needed */
+  height: 100px; /* Adjust height as needed */
+ 
+  display: flex;
+  justify-content: flex-end;
+  align-items: center; /* Align items vertically to the center */
+}
+
+.attendancebutton {
+  height: 30px;
+  padding: 10px 20px; /* Adjust padding as needed */
+  background-color: #007bff; /* Button background color */
+  color: #fff; /* Button text color */
+  border: none; /* Remove button border */
+  border-radius: 5px; /* Add border radius for rounded corners */
+  cursor: pointer;
+}
