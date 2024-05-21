@@ -1,8 +1,9 @@
 .employee-management-page {
   /* background-color: blueviolet; */
+ 
   margin: 10px;
   width: 180vh;
-  background-color: rgb(249, 249, 249);
+  background-color: rgb(236, 236, 236);
 }
 .submitbuton {
   display: grid;
@@ -13,8 +14,8 @@
   font-size: large;
 }
 .view {
-  width: 45vh;
-  height: 105vh;
+  width: 55vh;
+  height: 130vh;
   margin: 10px;
   background-color: #e8e8e8d4;
   border-radius: 4px;
@@ -48,7 +49,7 @@
 }
 .content {
   display: flex;
-  background-color: rgb(253, 253, 253);
+  background-color: rgb(181, 0, 0);
   width: 100%;
   padding: 10px;
 }
@@ -121,22 +122,57 @@
   color: white;
 }
 .employeeCards {
-  display: flex;
-
   width: 100%;
-  margin-left: 20px;
-}
-.employee-card {
-  background-color: rgb(226, 226, 226);
-  width: 250px;
-  height: 150px;
-  padding-left: 10px;
-  padding-top: 1px;
+  display: flex;
+  flex-wrap: wrap; /* Allow cards to wrap to the next line */
+  gap: 20px; /* Space between the cards */
+  justify-content: center; /* Center the cards within the container */
+  padding: 20px;
   box-sizing: border-box;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
-  margin: 10px;
 }
+
+.employee-card {
+  background-color: #ffffff; /* White background for the card */
+  width: 300px; /* Adjusted width for a better look */
+  padding: 20px; /* Add padding for better spacing within the card */
+  box-sizing: border-box;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Softer shadow for a cleaner look */
+  border-radius: 10px; /* Rounded corners */
+  margin: 10px; /* Space around each card */
+  transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition for hover effects */
+}
+
+.employee-card:hover {
+  transform: translateY(-5px); /* Slight lift on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+.employee-card h2 {
+  margin: 0 0 10px 0; /* Margin for the heading */
+  font-size: 1.5em; /* Larger font size for the heading */
+  color: #333; /* Darker color for the heading */
+}
+
+.employee-card p {
+  margin: 5px 0; /* Margin for the paragraphs */
+  font-size: 1em; /* Standard font size for the text */
+  color: #555; /* Slightly lighter color for the text */
+}
+
+.employee-card button {
+  background-color: #007bff; /* Blue background for the button */
+  color: #fff; /* White text color */
+  border: none; /* No border */
+  border-radius: 5px; /* Slightly rounded corners for the button */
+  padding: 10px 15px; /* Padding for the button */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+.employee-card button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
 .employee-card h2 {
   color: rgb(0, 0, 0);
 }
@@ -185,4 +221,59 @@
 .content2 {
   display: flex;
   flex-direction: column;
+}
+
+
+
+/* detaile view */
+/* Add this to your Employee_Management.css file or a new CSS file */
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4); /* Black background with transparency */
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+  animation: fadeIn 0.3s;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

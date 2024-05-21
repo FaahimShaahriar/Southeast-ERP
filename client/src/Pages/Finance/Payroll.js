@@ -1,49 +1,31 @@
-import React, { useState } from "react";
+import React from "react";
 import "../../Style/accounting.css";
 import MainLayout from "../../Layout/MainLayout";
 import Sidebar2 from "../../Components/sidebar2";
-
+import { useState, useEffect } from "react";
+import axios from "axios";
+axios.defaults.baseURL = "http://localhost:8080/";
 
 const Payroll = () => {
   const [payrolls, setPayrolls] = useState([]);
 
-  // Dummy payroll data
-  const dummyPayrolls = [
-    {
-      id: 1,
-      employeeName: "John Doe",
-      employeeId: "EMP001",
-      payday: "2024-04-30",
-      payAmount: "$2000",
-      status: "Pending",
-    },
-    {
-      id: 2,
-      employeeName: "Jane Smith",
-      employeeId: "EMP002",
-      payday: "2024-04-30",
-      payAmount: "$2500",
-      status: "Success",
-    },
-    // Add more dummy data as needed
-  ];
-
-  // Set initial state with dummy payroll data
-  useState(() => {
-    setPayrolls(dummyPayrolls);
-  }, []);
-
   // Function to calculate total payment due amount
-  const calculateTotalDue = () => {
-    // Logic to sum up pay amounts for pending payments
-    const totalDue = payrolls.reduce((total, payroll) => {
-      if (payroll.status === "Pending") {
-        return total + parseInt(payroll.payAmount.replace("$", ""), 10);
-      }
-      return total;
-    }, 0);
-    return totalDue;
+  const calculateTotalDue = () => {};
+
+  const fetchPayrolls = async () => {
+    try {
+      const response = await axios.get("/getPayroll");
+      setPayrolls(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
+
+  useEffect(() => {
+    fetchPayrolls();
+  }, []);
+  console.log(payrolls);
+
 
   return (
     <div>
@@ -52,8 +34,12 @@ const Payroll = () => {
           <Sidebar2></Sidebar2>
           <div className="payroll">
             <div className="top-section">
-              <button className="generate-report-button">Generate Report</button>
-              <div className="total-due">Total Payment Due: ${calculateTotalDue()}</div>
+              <button className="generate-report-button">
+                Generate Report
+              </button>
+              <div className="total-due">
+                Total Payment Due: ${calculateTotalDue()}
+              </div>
             </div>
             <h1>Payroll Page</h1>
             <table>
@@ -69,21 +55,20 @@ const Payroll = () => {
               </thead>
               <tbody>
                 {payrolls.map((payroll) => (
-                  <tr key={payroll.id}>
-                    <td>{payroll.employeeName}</td>
-                    <td>{payroll.employeeId}</td>
-                    <td>{payroll.payday}</td>
-                    <td>{payroll.payAmount}</td>
-                    <td>
-                      <div className={`status ${payroll.status.toLowerCase()}`}>
-                        {payroll.status}
-                      </div>
-                    </td>
-                    <td>
-                      {/* Add action button here */}
-                      <button className="action-button">Action</button>
-                    </td>
-                  </tr>
+                  <tr key={payroll._id}>
+                  <td>{payroll.employee ? `${payroll.employee.personalInformation.firstName} ${payroll.employee.personalInformation.lastName}` : 'Unknown'}</td>
+                  <td>{payroll.employee ? payroll.employee.employeeIDNumber : 'Unknown'}</td>
+                  <td>{new Date(payroll.payday).toLocaleDateString()}</td>
+                  <td>${payroll.payAmount}</td>
+                  <td>
+                    <div className={`status ${payroll.status.toLowerCase()}`}>
+                      {payroll.status}
+                    </div>
+                  </td>
+                  <td>
+                    <button className="action-button">Action</button>
+                  </td>
+                </tr>
                 ))}
               </tbody>
             </table>

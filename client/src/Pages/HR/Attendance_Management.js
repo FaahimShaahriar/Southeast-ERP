@@ -2,43 +2,52 @@ import React, { useState, useEffect } from "react";
 import "../../Style/Attendance.css";
 import Sidebar from "../../Components/sidebar";
 import MainLayout from "../../Layout/MainLayout";
+import axios from "axios";
+import Swal from "sweetalert2";
+axios.defaults.baseURL = "http://localhost:8080/";
 
 const AttendancePage = () => {
   const [attendanceData, setAttendanceData] = useState([]);
+  const [dataList, setDataList] = useState([]); //Employee
 
-  useEffect(() => {
-    fetchAttendanceData()
-      .then((data) => setAttendanceData(data))
-      .catch((error) =>
-        console.error("Error fetching attendance data:", error)
-      );
-  }, []);
-
-  const fetchAttendanceData = async () => {
-    // Simulate fetching data from an API
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const dummyData = [
-          {
-            id: 1,
-            employeeName: "John Doe",
-            date: "2022-04-23",
-            status: "Present",
-            late: false,
-          },
-          {
-            id: 2,
-            employeeName: "Jane Smith",
-            date: "2022-04-23",
-            status: "Absent",
-            late: true,
-          },
-          // Add more dummy data as needed
-        ];
-        resolve(dummyData);
-      }, 1000); // Simulate delay of 1 second
-    });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("/saveAttendance", attendanceData);
+      if (response.status === 200) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Attendance data has been saved",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    } catch (error) {
+      console.error("Error saving attendance data:", error);
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "Failed to save attendance data",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
   };
+
+  const getFetchData = async () => {
+    try {
+      const response = await axios.get("/GetEmp");
+      setDataList(response.data);
+      console.log(response.data);
+      // console.log(response);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  useEffect(() => {
+    getFetchData();
+  }, []);
 
   const handleStatusChange = (id, newStatus) => {
     const updatedData = attendanceData.map((entry) => {
@@ -75,18 +84,19 @@ const AttendancePage = () => {
                 <th>Date</th>
                 <th>Status</th>
                 <th>Late</th>
-                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {attendanceData.map((entry) => (
-                <tr key={entry.id}>
-                  <td>{entry.employeeName}</td>
+              {dataList.map((entry) => (
+                <tr>
+                  <td>
+                    {entry.personalInformation.firstName}{" "}
+                    {entry.personalInformation.lastName}
+                  </td>
                   <td>{entry.date}</td>
                   <td>
                     <input
                       type="checkbox"
-                      checked={entry.status === "Present"}
                       onChange={() =>
                         handleStatusChange(
                           entry.id,
@@ -104,18 +114,16 @@ const AttendancePage = () => {
                     />{" "}
                     Late
                   </td>
-                  <td>
-                    <button>Edit</button>
-                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
           <div>
             <div className="attendancebuttondiv">
-            <button className="attendancebutton">Save</button>
+              <button className="attendancebutton" onClick={handleSubmit}>
+                Save
+              </button>
             </div>
-            
           </div>
         </div>
       </div>

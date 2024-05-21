@@ -1,54 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState, useEffect } from "react";
 import "../../Style/leavemanagement.css";
 import MainLayout from "../../Layout/MainLayout";
 import Sidebar from "../../Components/sidebar";
+
+import axios from "axios";
+import Swal from "sweetalert2";
+axios.defaults.baseURL = "http://localhost:8080/";
+
 const LeaveManagementPage = () => {
-  const [leaveRequests, setLeaveRequests] = useState([]);
-  const [filteredRequests, setFilteredRequests] = useState([]);
+  const [leaveRequests, setLeaveRequests] = useState([]); //initial
+  const [filteredRequests, setFilteredRequests] = useState([]); // the one selected
+  const [LeaveList, setLeaveData] = useState([]);
 
-  // Dummy leave requests data
-  const dummyLeaveRequests = [
-    {
-      id: 1,
-      employeeName: "John Doe",
-      startDate: "2024-04-01",
-      endDate: "2024-04-05",
-      status: "Pending",
-    },
-    {
-      id: 2,
-      employeeName: "Jane Smith",
-      startDate: "2024-04-10",
-      endDate: "2024-04-15",
-      status: "Approved",
-    },
-    {
-      id: 3,
-      employeeName: "Alice Johnson",
-      startDate: "2024-04-20",
-      endDate: "2024-04-25",
-      status: "On Leave",
-    },
-    // Add more dummy data as needed
-  ];
-
-  // Set initial state with all leave requests
-  useState(() => {
-    setLeaveRequests(dummyLeaveRequests);
-    setFilteredRequests(dummyLeaveRequests);
-  }, []);
-
-  // Function to filter leave requests based on status
-  const filterRequests = (status) => {
-    if (status === "All") {
-      setFilteredRequests(leaveRequests);
-    } else {
-      const filtered = leaveRequests.filter(
-        (request) => request.status === status
-      );
-      setFilteredRequests(filtered);
-    }
-  };
   const handleApprove = (id) => {
     // Logic to update the status of the leave request to 'Approved'
     // You can implement this logic according to your requirements
@@ -62,6 +26,32 @@ const LeaveManagementPage = () => {
     console.log(`Leave request with ID ${id} has been denied`);
   };
 
+  const getFetchData = async () => {
+    try {
+      const response = await axios.get("/getLeave");
+      setLeaveData(response.data);
+      setFilteredRequests(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  // Function to filter leave requests based on status
+  const filterRequests = (status) => {
+    if (status === "All") {
+      setFilteredRequests(LeaveList);
+    } else {
+      const filtered = LeaveList.filter(
+        (request) => request.leaveStatus === status
+      );
+      setFilteredRequests(filtered);
+    }
+  };
+  useEffect(() => {
+    getFetchData();
+  }, []);
+
+  console.log(LeaveList);
   return (
     <div>
       <MainLayout>
@@ -85,30 +75,32 @@ const LeaveManagementPage = () => {
             <table>
               <thead>
                 <tr>
+                  <th>Employee ID</th>
                   <th>Employee Name</th>
                   <th>Start Date</th>
                   <th>End Date</th>
                   <th>Status</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
                 {filteredRequests.map((request) => (
-                  <tr key={request.id}>
-                    <td>{request.employeeName}</td>
-                    <td>{request.startDate}</td>
-                    <td>{request.endDate}</td>
-                    <td>{request.status}</td>
+                  <tr key={request._id}>
                     <td>
-                      {request.status === "Pending" && (
-                        <>
-                          <button className="leavebutton"onClick={() => handleApprove(request.id)}>
-                            Approve
-                          </button>
-                          <button onClick={() => handleDeny(request.id)}>
-                            Deny
-                          </button>
-                        </>
-                      )}
+                      {request.employeeId
+                        ? `${request.employeeId.miscellaneous.employeeIDNumber} `
+                        : "Unknown"}
+                    </td>
+                    <td>
+                      {request.employeeId
+                        ? `${request.employeeId.personalInformation.firstName} ${request.employeeId.personalInformation.lastName}`
+                        : "Unknown"}
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                      <button className="action-button">Action</button>
                     </td>
                   </tr>
                 ))}
