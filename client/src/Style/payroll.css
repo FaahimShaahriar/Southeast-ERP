@@ -1,0 +1,73 @@
+.content {
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    background-color: #ffffff;
+  }
+  
+
+  .payroll{
+    background-color: #ffffff;
+    /* padding: 10px 10px; */
+    padding-left: 20px;
+  }
+
+  .space{
+    width: 250px;
+  }
+
+
+  .chat-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+
+  .chatinput{
+    
+      width: calc(100% - 90px);
+      padding: 10px;
+      margin-right: 10px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    
+  }
+
+  .chatbutton {
+    margin: 20px;
+    width: 70px;
+    padding: 10px;
+    padding-left: 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: #0798ff;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .chatbutton:hover {
+    background-color: #0056b3;
+  }
+  
+  .chatbutton:active {
+    background-color: #004494;
+  }
+  
+  .outputText {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #e9ecef;
+  }

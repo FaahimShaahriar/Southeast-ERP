@@ -1,9 +1,15 @@
+.content {
+  display: flex;
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+}
+
 .employee-management-page {
   /* background-color: blueviolet; */
- 
-  margin: 10px;
+
+  margin-left: 20px;
   width: 180vh;
-  background-color: rgb(236, 236, 236);
+  background-color: rgb(230, 230, 230);
 }
 .submitbuton {
   display: grid;
@@ -47,19 +53,14 @@
   /* background-color: rgb(16, 240, 54); */
   width: 100%;
 }
-.content {
-  display: flex;
-  background-color: rgb(181, 0, 0);
-  width: 100%;
-  padding: 10px;
-}
+
 .vline {
   width: 30px;
 }
 .employeeForm {
   background-color: rgb(235, 235, 235);
   max-width: 400px;
-  max-height: 500px;
+  max-height: 600px;
   padding: 20px;
   margin-top: -30px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
@@ -115,6 +116,7 @@
 }
 
 .content > div {
+
 }
 .item {
   flex: 0 0 calc(33.33% - 10px); /* Adjust the width of each item */
@@ -132,14 +134,17 @@
 }
 
 .employee-card {
-  background-color: #ffffff; /* White background for the card */
-  width: 300px; /* Adjusted width for a better look */
+  background-color: #bfbfbf67; /* White background for the card */
+  width: 310px; /* Adjusted width for a better look */
   padding: 20px; /* Add padding for better spacing within the card */
   box-sizing: border-box;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Softer shadow for a cleaner look */
+  border: 3px solid #820101;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); /* Softer shadow for a cleaner look */
   border-radius: 10px; /* Rounded corners */
   margin: 10px; /* Space around each card */
   transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition for hover effects */
+  align-items: center;
+  justify-content: center;
 }
 
 .employee-card:hover {
@@ -191,9 +196,6 @@
   padding: 20px;
 }
 
-.content {
-  displa: flex;
-}
 .DashImages {
   margin-top: -100px;
   background-color: #680101;
@@ -223,8 +225,6 @@
   flex-direction: column;
 }
 
-
-
 /* detaile view */
 /* Add this to your Employee_Management.css file or a new CSS file */
 .modal {
@@ -232,26 +232,36 @@
   justify-content: center;
   align-items: center;
   position: fixed;
-  z-index: 1000;
-  left: 0;
   top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4); /* Black background with transparency */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
 }
 
+
 .modal-content {
-  background-color: #fefefe;
-  margin: auto;
+  background-color: #fff;
   padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  max-width: 500px;
   border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  position: relative;
-  animation: fadeIn 0.3s;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 500px; /* Adjust width as needed */
+  max-width: 100%;
+}
+
+
+.selcetedEmp {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #dedede;
+}
+.selcetedEmp p {
+}
+.selcetedEmp h1 {
+  font-size: medium;
+  font-weight: bold;
 }
 
 .close {
@@ -269,6 +279,13 @@
   cursor: pointer;
 }
 
+@media screen and (max-width: 768px) {
+  .modal-content {
+    width: 95%;
+    margin: 0 auto;
+    align-items: center;
+  }
+}
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -276,4 +293,22 @@
   to {
     opacity: 1;
   }
+}
+
+.textColor {
+  color: #480101;
+}
+
+.empDetail {
+  display: flex;
+  flex-direction: row;
+}
+
+.boldText {
+  font-weight: bold;
+  margin-right: 10px;
+}
+.selectedempdata {
+  padding: 20px;
+  display: flex;
 }

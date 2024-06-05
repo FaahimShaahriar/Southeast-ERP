@@ -5,6 +5,7 @@ import MainLayout from "../../Layout/MainLayout";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+
 axios.defaults.baseURL = "http://localhost:8080/";
 
 const EmployeeManagementPage = () => {
@@ -29,6 +30,8 @@ const EmployeeManagementPage = () => {
         lastName: e.target.lastName.value,
         dateOfBirth: e.target.dateOfBirth.value,
         gender: e.target.gender.value,
+        email: e.target.email.value,
+        contactNumber: e.target.contactNumber.value,
       },
       employmentDetails: {
         jobTitle: e.target.jobTitle.value,
@@ -44,7 +47,7 @@ const EmployeeManagementPage = () => {
       miscellaneous: {
         profilePicture: "abcd",
         nidPicture: "abcd",
-        employeeIDNumber: e.target.employeeIDNumber.value,
+        employeeIDNumber: e.target.employeeIDNumber.value + "sldl",
         // profilePicture: e.target.profilePicture.value,
         // nidPicture: e.target.nidPicture.value,
         // employeeIDNumber: e.target.employeeIDNumber.value,
@@ -62,6 +65,7 @@ const EmployeeManagementPage = () => {
           showConfirmButton: false,
           timer: 1500,
         });
+        e.target.reset();
       }
     } catch (error) {
       console.log(error);
@@ -75,6 +79,8 @@ const EmployeeManagementPage = () => {
     }
 
     setAddSection(false);
+    setAddSection2(true);
+    setDataList([...dataList, formData]);
   };
 
   //Fetch All Employee
@@ -141,7 +147,7 @@ const EmployeeManagementPage = () => {
                   </div>
                   <div className="line"></div>
                   <div className="Formcontent">
-                    <label htmlFor="firsNname">Fast Name</label>
+                    <label htmlFor="firstName">Fast Name</label>
                     <input type="text" id="name" name="firstName"></input>
                     <label htmlFor="lname">Last Name</label>
                     <input type="text" id="name" name="lastName"></input>
@@ -157,6 +163,14 @@ const EmployeeManagementPage = () => {
                       <option value="Male">Male</option>
                       <option value="Female">Female</option>
                     </select>
+                    <label htmlFor="email">Email</label>
+                    <input type="text" id="email" name="email"></input>
+                    <label htmlFor="contactnumber">Contact Number</label>
+                    <input
+                      type="text"
+                      id="contactnumber"
+                      name="contactNumber"
+                    ></input>
                   </div>
                   <div className="margin">
                     <label className="">Employment Details:</label>
@@ -170,6 +184,7 @@ const EmployeeManagementPage = () => {
                       <option value="sales">Sales & Marketing</option>
                       <option value="accounts">Accounts/HR</option>
                       <option value="development">Development</option>
+                      <option value="IT">IT</option>
                       <option value="office">Office</option>
                     </select>
                     <label for="dropdown">Employment Status</label>
@@ -255,7 +270,6 @@ const EmployeeManagementPage = () => {
                 </select>
                 <p>Selected option: {selectedOption}</p>
               </div>
-
               <div className="employeeCards">
                 {dataList.map((employee, index) => (
                   <div className="employee-card" key={index}>
@@ -264,7 +278,11 @@ const EmployeeManagementPage = () => {
                       {employee.personalInformation.lastName}
                     </h2>
                     <p>Department: {employee.employmentDetails.department}</p>
-                    <p>Email: {employee.personalInformation.email}</p>
+                    <p>Email: {employee.personalInformation.email}</p>{" "}
+                    <p>
+                      Contact Number:{" "}
+                      {employee.personalInformation.contactNumber}
+                    </p>
                     <button onClick={() => handleViewDetails(employee)}>
                       View
                     </button>
@@ -273,6 +291,7 @@ const EmployeeManagementPage = () => {
               </div>
             </div>
           )}
+
           {selectedEmployee && (
             <div className="modal">
               <div className="modal-content">
@@ -281,45 +300,80 @@ const EmployeeManagementPage = () => {
                 </span>
                 <h2>Employee Details</h2>
                 {selectedEmployee && (
-                  <div>
-                    <p>
-                      Name: {selectedEmployee.personalInformation.firstName}{" "}
-                      {selectedEmployee.personalInformation.lastName}
-                    </p>
-                    <p>Email: {selectedEmployee.personalInformation.email}</p>
-                    <p>
-                      Department:{" "}
-                      {selectedEmployee.employmentDetails.department}
-                    </p>
-                    <p>
-                      Job Title: {selectedEmployee.employmentDetails.jobTitle}
-                    </p>
-                    <p>
-                      Date of Birth:{" "}
-                      {selectedEmployee.personalInformation.dateOfBirth}
-                    </p>
-                    <p>Gender: {selectedEmployee.personalInformation.gender}</p>
-                    <p>
-                      Salary: {selectedEmployee.compensationAndBenefits.salary}
-                    </p>
-                    <p>
-                      Bank Account:{" "}
-                      {
-                        selectedEmployee.compensationAndBenefits
-                          .bankAccountDetails
-                      }
-                    </p>
-                    <p>
-                      Benefits:{" "}
-                      {
-                        selectedEmployee.compensationAndBenefits
-                          .benefitsEnrollment
-                      }
-                    </p>
-                    <p>
-                      Employee ID:{" "}
-                      {selectedEmployee.miscellaneous.employeeIDNumber}
-                    </p>
+                  <div className="modal">
+                    <div className="modal-content">
+                      <span className="close" onClick={closeModal}>
+                        &times;
+                      </span>
+                      <h2>Employee Details</h2>
+                      <div className="selectedempdata">
+                        <span className="boldText">Name:</span>{" "}
+                        <span>
+                          {selectedEmployee.personalInformation.firstName}{" "}
+                          {selectedEmployee.personalInformation.lastName}
+                        </span>
+                      </div>
+                      <div className="selectedempdata">
+                        <span className="boldText">Email:</span>{" "}
+                        <span>
+                          {selectedEmployee.personalInformation.email}
+                        </span>
+                      </div>
+                      <div className="selectedempdata">
+                        <span className="boldText">Department:</span>{" "}
+                        <span>
+                          {selectedEmployee.employmentDetails.department}
+                        </span>
+                      </div>
+                      <div className="selectedempdata">
+                        <span className="boldText">Job Title:</span>{" "}
+                        <span>
+                          {selectedEmployee.employmentDetails.jobTitle}
+                        </span>
+                      </div>
+                      <div className="selectedempdata">
+                        <span className="boldText">Date of Birth:</span>{" "}
+                        <span>
+                          {selectedEmployee.personalInformation.dateOfBirth}
+                        </span>
+                      </div>
+                      <div className="selectedempdata">
+                        <span className="boldText">Gender:</span>{" "}
+                        <span>
+                          {selectedEmployee.personalInformation.gender}
+                        </span>
+                      </div>
+                      <div className="selectedempdata">
+                        <span className="boldText">Salary:</span>{" "}
+                        <span>
+                          {selectedEmployee.compensationAndBenefits.salary}
+                        </span>
+                      </div>
+                      <div className="selectedempdata">
+                        <span className="boldText">Bank Account:</span>{" "}
+                        <span>
+                          {
+                            selectedEmployee.compensationAndBenefits
+                              .bankAccountDetails
+                          }
+                        </span>
+                      </div>
+                      <div className="selectedempdata">
+                        <span className="boldText">Benefits:</span>{" "}
+                        <span>
+                          {
+                            selectedEmployee.compensationAndBenefits
+                              .benefitsEnrollment
+                          }
+                        </span>
+                      </div>
+                      <div className="selectedempdata">
+                        <span className="boldText">Employee ID:</span>{" "}
+                        <span>
+                          {selectedEmployee.miscellaneous.employeeIDNumber}
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 )}
               </div>

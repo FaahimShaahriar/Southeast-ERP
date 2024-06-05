@@ -27,10 +27,10 @@ const Sidebar = () => {
           </Link>
         </li>
         <li>
-          <Link to="/Leave_Management">Leave Management</Link>
+          <Link to="/Attendance&Leave_Management">Attendace & <br></br>Leave </Link>
         </li>
         <li>
-          <Link to="/Attendance">Attendance </Link>
+          <Link to="/Clients">Clients </Link>
         </li>
         <li>
           <Link to="/Training">Training & Development</Link>

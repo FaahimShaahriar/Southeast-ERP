@@ -29,7 +29,7 @@ const Payroll = () => {
                 setAddSection3(false);
               }}
             >
-              Employee List
+              Client
             </button>
             <button
               className="button"
@@ -39,7 +39,7 @@ const Payroll = () => {
                 setAddSection3(false);
               }}
             >
-              Add Employee Page
+              Loans
             </button>
           </div>
           {addSection && <div>hello</div>}

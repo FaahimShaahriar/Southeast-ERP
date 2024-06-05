@@ -2,19 +2,49 @@ import Sidebar from "../Components/sidebar";
 import { useNavigate } from "react-router-dom";
 import "../Style/MainLayout.css";
 import logo from "../../src/logo.jpg";
+import Swal from "sweetalert2";
 function MainLayout({ children }) {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    const confirmLogout = window.confirm("Are you sure you want to logout?");
-    if (confirmLogout) {
-      // Handle logout logic here
-      console.log("User confirmed logout");
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      cancelButtonText: "No",
+      reverseButtons: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let timerInterval;
+        Swal.fire({
+          title: "Logged out",
+          html: "I will close in <b></b> milliseconds.",
+          timer: 1000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading();
+            const timer = Swal.getPopup().querySelector("b");
+            timerInterval = setInterval(() => {
+              timer.textContent = `${Swal.getTimerLeft()}`;
+            }, 100);
+          },
+          willClose: () => {
+            clearInterval(timerInterval);
+          },
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+            console.log("I was closed by the timer");
+          }
+        });
 
-      navigate("/");
-    } else {
-      console.log("User cancelled logout");
-    }
+        console.log("User confirmed logout");
+        localStorage.setItem("authToken", null);
+        navigate("/");
+      }
+    });
   };
 
   return (

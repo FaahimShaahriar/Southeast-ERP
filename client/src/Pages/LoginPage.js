@@ -1,42 +1,58 @@
-import React, { useState } from 'react';
-import '../../src/Style/loginpage.css';
-import { Link } from "react-router-dom";
-const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+// LoginPage.js
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import "../Style/login.css";
 
-  const handleLogin = () => {
-    // Handle login logic here
-    console.log('Username:', username);
-    console.log('Password:', password);
+import logo from "../../src/logo.png";
+
+const LoginPage = () => {
+  const navigate = useNavigate();
+
+  const handleLogin = (e) => {
+    // Logic to authenticate user
+    // On successful authentication:
+
+    const data = "jihan";
+    localStorage.setItem("authToken", data);
+    navigate("/hr"); // Redirect to a protected route after login
+
+    if (e.target.loginas.value == "hr") {
+      navigate("/hr");
+    } else {
+      navigate("/FinanceDashboard");
+    }
   };
 
   return (
-    <div className="login-container">
-      <h2>Login</h2>
-      <form className="login-form" onSubmit={(e) => e.preventDefault()}>
-        <div className="form-group">
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
+    <div className="loginpage">
+      <div className="login-container">
+        <div className="login-logo">
+          <img src={logo} alt="Logo" />
         </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button className="login-button" onClick={handleLogin}><Link to="/FinanceDashboard">Home</Link></button>
-      </form>
+        <form className="login-form " onSubmit={handleLogin}>
+          <div className="form-group">
+            <input type="email" placeholder="Email" />
+          </div>
+          <div className="form-group">
+            <input type="password" placeholder="Password" />
+          </div>
+          <div className="form-group">
+            <label htmlFor="dropdown">Select an option:</label>
+            <select id="dropdown" name="loginas">
+              <option value="">Select...</option>
+              <option value="hr">HR</option>
+              <option value="accounts">Accounts</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <button className="button1" type="submit">
+              Login
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
 
-export default Login;
+export default LoginPage;

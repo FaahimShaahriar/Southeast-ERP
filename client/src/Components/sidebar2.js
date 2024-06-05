@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../Style/sidebar.css";
-import logo from '../../src/logo.svg';
+import logo from "../../src/logo.svg";
 class Sidebar2 extends React.Component {
   render() {
     return (
@@ -19,12 +19,16 @@ class Sidebar2 extends React.Component {
           <li>
             <Link to="/Payroll">Payroll Management</Link>
           </li>
-          
+
           <li>
-            <Link to="/Expense">Expense Management</Link>
+            <Link to="/Expense">Clients/Bank</Link>
           </li>
           <li>
             <Link to="/Budgeting">Bedgeting</Link>
+          </li>
+          <div className="line"></div>
+          <li>
+            <Link to="/Training">Profile</Link>
           </li>
         </ul>
       </div>

@@ -58,3 +58,17 @@
   border-radius: 5px; /* Add border radius for rounded corners */
   cursor: pointer;
 }
+
+.action-button{
+  height: 30px;
+  padding: 10px 20px; /* Adjust padding as needed */
+  background-color: #e9000052; /* Button background color */
+  color: #000000; /* Button text color */
+  border: none; /* Remove button border */
+  border-radius: 5px; /* Add border radius for rounded corners */
+  cursor: pointer;
+}
+
+.action-button:hover{
+  background-color: #e900009e;
+}

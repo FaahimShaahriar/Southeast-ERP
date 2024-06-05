@@ -11,6 +11,8 @@ const EmployeeSchema = new mongoose.Schema({
     lastName: { type: String, required: true },
     dateOfBirth: { type: String },
     gender: { type: String },
+    email: { type: String },
+    contactNumber: { type: String },
   },
   employmentDetails: {
     jobTitle: { type: String, required: true },
@@ -106,9 +108,8 @@ const payrollSchema = new mongoose.Schema(
 //Attendance
 const attendanceSchema = new mongoose.Schema(
   {
-    employeeId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Employee", // Assuming you have an Employee model
+    employeeID: {
+      type: String,
       required: true,
     },
     date: {
